@@ -42,11 +42,12 @@ checkCentosSELinux() {
     fi
 }
 checkSystem() {
-    
+    if ture; then
         mkdir -p /etc/yum.repos.d
 
         
                 centosVersion=8
+         
            
 
         release="centos"
