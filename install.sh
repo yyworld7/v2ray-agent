@@ -42,11 +42,11 @@ checkCentosSELinux() {
     fi
 }
 checkSystem() {
-    if ture; then
+   
         mkdir -p /etc/yum.repos.d
 
         
-                centosVersion=8
+        centosVersion=8
          
            
 
@@ -55,30 +55,6 @@ checkSystem() {
         removeType='yum -y remove'
         upgrade="yum update -y --skip-broken"
         checkCentosSELinux
-    elif grep </etc/issue -q -i "debian" && [[ -f "/etc/issue" ]] || grep </etc/issue -q -i "debian" && [[ -f "/proc/version" ]]; then
-        release="debian"
-        installType='apt -y install'
-        upgrade="apt update"
-        updateReleaseInfoChange='apt-get --allow-releaseinfo-change update'
-        removeType='apt -y autoremove'
-
-    elif grep </etc/issue -q -i "ubuntu" && [[ -f "/etc/issue" ]] || grep </etc/issue -q -i "ubuntu" && [[ -f "/proc/version" ]]; then
-        release="ubuntu"
-        installType='apt -y install'
-        upgrade="apt update"
-        updateReleaseInfoChange='apt-get --allow-releaseinfo-change update'
-        removeType='apt -y autoremove'
-        if grep </etc/issue -q -i "16."; then
-            release=
-        fi
-    fi
-
-    if [[ -z ${release} ]]; then
-        echoContent red "\n本脚本不支持此系统，请将下方日志反馈给开发者\n"
-        echoContent yellow "$(cat /etc/issue)"
-        echoContent yellow "$(cat /proc/version)"
-        exit 0
-    fi
 }
 
 # 检查CPU提供商
