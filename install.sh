@@ -42,16 +42,12 @@ checkCentosSELinux() {
     fi
 }
 checkSystem() {
-    if [[ -n $(find /etc -name "redhat-release") ]] || grep </proc/version -q -i "centos"; then
+    
         mkdir -p /etc/yum.repos.d
 
-        if [[ -f "/etc/centos-release" ]]; then
-            centosVersion=$(rpm -q centos-release | awk -F "[-]" '{print $3}' | awk -F "[.]" '{print $1}')
-
-            if [[ -z "${centosVersion}" ]] && grep </etc/centos-release -q -i "release 8"; then
+        
                 centosVersion=8
-            fi
-        fi
+           
 
         release="centos"
         installType='yum -y install'
